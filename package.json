@@ -1,0 +1,25 @@
+{
+  "name": "book_app",
+  "version": "1.0.0",
+  "description": "Partnered Lab 11-14",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rkgallaway/book_app.git"
+  },
+  "author": "Ryan Gallaway and Fletcher LaRue",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rkgallaway/book_app/issues"
+  },
+  "homepage": "https://github.com/rkgallaway/book_app#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "superagent": "^4.0.0"
+  }
+}
