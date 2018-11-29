@@ -11,6 +11,8 @@ app.set('view engine', 'ejs');
 //showing app where to find resources
 app.use(express.static('./public'));
 
+app.use(express.urlencoded( {extended: true} ));
+
 //route for home view
 app.get('/', (request, response) =>{
   response.render('pages/index.ejs');
@@ -48,14 +50,30 @@ function handleError(err, res) {
 function createSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
 
-  console.log(request.body)
-  console.log(request.body.search)
+  // console.log('hello');
+  // console.log('request: ', request);
+  // console.log('response: ', response);
+  // console.log('request.body: ', request.body);
+  // console.log('request.body: ', response.body);
+  // console.log('request.body.search: ', request.body['search-term']);
 
-  if (request.body.search[1] === 'title') { url += `+intitle:${request.body.search[0]}`; }
-  if (request.body.search[1] === 'author') { url += `+inauthor:${request.body.search[0]}`; }
+  console.log('~~~~~~~~~~~~~~~~~~');
+  console.log('request.body: ', request.body);
+  
 
+  if (request.body.searchRadio === 'title') { url += `+intitle:${request.body.searchTerm}`; }
+  if (request.body.searchRadio === 'author') { url += `+inauthor:${request.body.searchTerm}`; }
+
+  console.log('url: ' , url);
+  console.log('~~~~~~~~~~~~~~~~~~');
   superagent.get(url)
-    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult)))
+    .then(apiResponse => {
+      console.log('we got a response');
+      // console.log('response: ', response);
+      console.log('response:', apiResponse.body.items);
+      apiResponse.body.items.map(bookResult => new Book(bookResult));
+
+    })
     .then(results => response.render('pages/searches/show', {searchResults: results}))
     .catch(error => handleError(error, response));
 }
