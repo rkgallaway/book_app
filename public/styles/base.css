@@ -1,3 +1,28 @@
+* {
+    /* outline: 1px solid black !important; */
+    margin: 5px;
+}
+html {
+    /* width: 300px; */
+}
+
 body {
-    background-color: lightcoral;
+    padding: 10px;
+    background-color: rgb(199, 180, 180);
+    width: 300px;
+}
+
+fieldset {
+    border: none;
+}
+
+input {
+
+}
+
+form {
+    padding: 10px;
+    /* background-color: green; */
+    display: flex;
+    justify-content: left;
 }

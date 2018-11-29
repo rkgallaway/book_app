@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Book App</title>
+        <!-- TODO: add common head elements partial -->
+        <link rel="stylesheet" type="text/css" href="styles/reset.css">
         <link rel="stylesheet" type="text/css" href="styles/base.css">
-
-
+        <!-- TODO: add favicon -->
     </head>
 
     <body>
-        <p>Hello World</p>
 
+        <form action="/searches" method ="post">
+            <fieldset>
+                <label> Search
+                    <input type="text"></input>    
+                </label>
+                <button type="submit">Go!</button>
+                <div>
+                    <label> 
+                        <input type="radio" name="searchRadio"></input>
+                        Search by Title    
+                    </label>
+                    <label> 
+                        <input type="radio" name="searchRadio"></input>    
+                        Search by Author
+                    </label>
+                </div>
+            </fieldset>
+        </form>
     </body>
+
 </html>
