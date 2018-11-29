@@ -12,20 +12,20 @@
 
         <form action="/searches" method ="post">
             <fieldset>
+
                 <label> Search
-                    <input type="text"></input>    
+                    <input type="text" name="searchTerm"></input>    
                 </label>
                 <button type="submit">Go!</button>
-                <div>
-                    <label> 
-                        <input type="radio" name="searchRadio"></input>
-                        Search by Title    
-                    </label>
-                    <label> 
-                        <input type="radio" name="searchRadio"></input>    
-                        Search by Author
-                    </label>
-                </div>
+
+                <label for="title">Search by Title 
+                    <input type="radio" name="searchRadio" value="title"></input>
+                </label>
+
+                <label for="author">Search by Author
+                    <input type="radio" name="searchRadio" value="author"></input>
+                </label>
+
             </fieldset>
         </form>
     </body>
