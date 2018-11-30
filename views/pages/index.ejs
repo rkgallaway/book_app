@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Book App</title>
-        <!-- TODO: add common head elements partial -->
-        <link rel="stylesheet" type="text/css" href="styles/reset.css">
-        <link rel="stylesheet" type="text/css" href="styles/base.css">
-        <!-- TODO: add favicon -->
+        <%- include('../partials/head.ejs') %>
     </head>
 
     <body>
@@ -28,6 +24,9 @@
 
             </fieldset>
         </form>
+        <footer>
+            <%- include('../partials/footer') %>
+        </footer>
     </body>
 
 </html>
