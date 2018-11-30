@@ -60,13 +60,13 @@ Actual time needed to complete: 1.5 hours with all 3, and 1.5 hours each for RG 
 ++++++++++++++++++++++++++++++++++++++++++++++++
 Number and name of feature 4: Error handling 
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1 hr   
 
-Start time:
+Start time: 1:15pm
 
-Finish time: 
+Finish time: 1:45
 
-Actual time needed to complete: 
+Actual time needed to complete: 30 minutes
 ++++++++++++++++++++++++++++++++++++++++++++++
 Number and name of feature 5: Style the book application
 

@@ -39,9 +39,12 @@ function Book(info) {
 // ++++++++++++ HANDLERS ++++++++++++++++
 
 // Error handler
-function handleError(err, res) {
-  console.error(err);
-  if (res) res.status(500).send('Sorry, something went wrong');
+function handleError(error, response) {
+  console.error(error);
+  // if (res) res.status(500).send('Sorry, something went wrong');
+  //ressponse.render instead
+  response.render('pages/error', {error: error});
+
 }
 
 // No API key required
@@ -49,7 +52,7 @@ function createSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
 
   console.log('~~~~~~~~~~~~~~~~~~');
-  console.log('request.body: ', request.body);
+  // console.log('request.body: ', request.body);
 
   if (request.body.searchRadio === 'title') { url += `+intitle:${request.body.searchTerm}&maxResults=1`; }
   if (request.body.searchRadio === 'author') { url += `+inauthor:${request.body.searchTerm}&maxResults=1`; }
@@ -69,8 +72,9 @@ function createSearch(request, response) {
       // console.log('apiResponse.body.items[0].volumeInfo.description: ', apiResponse.body.items[0].volumeInfo.description);
     })
     .then(results => {
-      console.log('right before render books');
-      console.log('results: ', results);
+      // console.log('right before render books');
+      // console.log('results: ', results);
+      
       response.render('pages/searches/show', {searchResults: allBooks})
     })
     .catch(error => handleError(error, response));
