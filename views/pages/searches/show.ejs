@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html>
- <!-- head partial -->
+  <head>
+    <!-- head partial -->
+  </head>
 
-<!-- TODO: add results loop here -->
+  <body>
+    <main>
+      <!-- TODO: add results loop here -->
+      <ul>
+        <% searchResults.forEach(book => { %>
+          <ul>
+              <li> <%= book.title %> </li>
+          </ul>
+        <% }) %>
+      </ul>
+    </main>
+  </body>
 
- <!-- footer partial -->
+  <!-- footer partial -->
 </html>
