@@ -28,7 +28,7 @@ let allBooks = [];
 function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = info.volumeInfo.title || 'No title available';
-  this.isbn = info.volumeInfo.industryIdentifiers[0].identifier || info.volumeInfo.industryIdentifiers[1].identifier|| 'No ISBN available';
+  this.isbn = info.volumeInfo.industryIdentifiers[0].identifier || info.volumeInfo.industryIdentifiers[1].identifier || 'No ISBN available';
   this.image_url = info.volumeInfo.imageLinks.smallThumbnail|| placeholderImage;
   this.author = info.volumeInfo.authors || 'No author available';
   this.description = info.volumeInfo.description || 'No description available';
@@ -53,7 +53,6 @@ function createSearch(request, response) {
 
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult)))
-
     .then(results => response.render('pages/searches/show', {searchResults: results}))
     .catch(error => handleError(error, response));
 }
