@@ -5,29 +5,40 @@
         <!-- TODO: add common head elements partial -->
         <link rel="stylesheet" type="text/css" href="styles/reset.css">
         <link rel="stylesheet" type="text/css" href="styles/base.css">
+        <link rel="stylesheet" type="text/css" href="styles/layout.css">
+
         <!-- TODO: add favicon -->
     </head>
 
     <body>
+        <header>
+            <div>
+                Fancy Book App
+            </div>
+        </header>
+        <main></main>
+            <form action="/searches" method ="post">
+                <fieldset>
 
-        <form action="/searches" method ="post">
-            <fieldset>
+                    <label> Search
+                        <input type="text" name="searchTerm"></input>    
+                    </label>
+                    <button type="submit">Go!</button>
 
-                <label> Search
-                    <input type="text" name="searchTerm"></input>    
-                </label>
-                <button type="submit">Go!</button>
+                    <label for="title">Search by Title 
+                        <input type="radio" name="searchRadio" value="title" required></input>
+                    </label>
 
-                <label for="title">Search by Title 
-                    <input type="radio" name="searchRadio" value="title" required></input>
-                </label>
+                    <label for="author">Search by Author
+                        <input type="radio" name="searchRadio" value="author" required></input>
+                    </label>
 
-                <label for="author">Search by Author
-                    <input type="radio" name="searchRadio" value="author" required></input>
-                </label>
-
-            </fieldset>
-        </form>
+                </fieldset>
+            </form>
+        </main>
+        <footer>
+            <div> &copy; 2018</div>
+        </footer>
     </body>
 
 </html>
