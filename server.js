@@ -23,6 +23,7 @@ app.post('/searches', createSearch);
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 let allBooks = [];
+
 // ++++++++++++ MODELS ++++++++++++++++
 function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
@@ -47,20 +48,11 @@ function handleError(err, res) {
 function createSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
 
-  // console.log('~~~~~~~~~~~~~~~~~~');
-  // console.log('request.body: ', request.body);
+  if (request.body.searchRadio === 'title') { url += `+intitle:${request.body.searchTerm}&maxResults=40`; }
+  if (request.body.searchRadio === 'author') { url += `+inauthor:${request.body.searchTerm}&maxResults=40`; }
 
-  if (request.body.searchRadio === 'title') { url += `+intitle:${request.body.searchTerm}&maxResults=3`; }
-  if (request.body.searchRadio === 'author') { url += `+inauthor:${request.body.searchTerm}`; }
-
-  // console.log('url: ' , url);
-  // console.log('~~~~~~~~~~~~~~~~~~');
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult)))
-
-    .then(results => {
-      console.log(`results.title: ${results}`);
-      response.render('pages/searches/show', {searchResults: results})
-    })
+    .then(results => response.render('pages/searches/show', {searchResults: results}))
     .catch(error => handleError(error, response));
 }

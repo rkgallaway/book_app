@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
- <!-- head partial -->
  <head>
     <%- include('../../partials/head') %> 
  </head>
-<!-- TODO: add results loop here -->
-
- <!-- footer partial -->
+<body>
+    <header>
+      <%- include('../../partials/header') %>
+    </header>
+    <main>
+      <ul>
+        <% searchResults.forEach(book => { %>
+          <ul>
+              <li> <%= book.title %> </li>
+          </ul>
+        <% }) %>
+      </ul>
+    </main>
+  </body>
  <footer>
      <%- include('../../partials/footer') %>
  </footer>
