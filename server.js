@@ -51,7 +51,7 @@ function createSearch(request, response) {
   console.log('request.body: ', request.body);
 
   if (request.body.searchRadio === 'title') { url += `+intitle:${request.body.searchTerm}&maxResults=1`; }
-  if (request.body.searchRadio === 'author') { url += `+inauthor:${request.body.searchTerm}`; }
+  if (request.body.searchRadio === 'author') { url += `+inauthor:${request.body.searchTerm}&maxResults=1`; }
 
   console.log('url: ' , url);
   console.log('~~~~~~~~~~~~~~~~~~');
