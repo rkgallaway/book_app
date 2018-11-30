@@ -3,6 +3,7 @@
 const express = require('express');
 const superagent = require('superagent');
 const app = express();
+
 require('dotenv').config();
 const PORT = process.env.PORT;
 
@@ -32,7 +33,7 @@ function Book(info) {
   this.author = info.volumeInfo.authors || 'No author available';
   this.description = info.volumeInfo.description || 'No description available';
 
-  allBooks.push(this);
+  // allBooks.push(this);
 }
 
 // ++++++++++++ HANDLERS ++++++++++++++++
@@ -57,15 +58,39 @@ function createSearch(request, response) {
   console.log('~~~~~~~~~~~~~~~~~~');
   superagent.get(url)
     .then(apiResponse => {
-      apiResponse.body.items.map(bookResult => new Book(bookResult));
-      console.log('apiResponse.body.items[0].volumeInfo.title: ', apiResponse.body.items[0].volumeInfo.title);
-      console.log('apiResponse.body.items[0].volumeInfo.industryIdentifiers[0].identifier: ' , apiResponse.body.items[0].volumeInfo.industryIdentifiers[0].identifier);
-      console.log('apiResponse.body.items[0].volumeInfo.imageLinks.smallThumbnail: ', apiResponse.body.items[0].volumeInfo.imageLinks.smallThumbnail);
-      console.log('apiResponse.body.items[0].volumeInfo.authors[0]: ', apiResponse.body.items[0].volumeInfo.authors[0]);
-      console.log('apiResponse.body.items[0].volumeInfo.description: ', apiResponse.body.items[0].volumeInfo.description);
+      // ----- SWAP TO TURN ON AND OFF REAL AND FAKE DATA ----
+      // apiResponse.body.items.map(bookResult => new Book(bookResult)); // real data
+      makeFakeData() // fake data
+
+      // console.log('apiResponse.body.items[0].volumeInfo.title: ', apiResponse.body.items[0].volumeInfo.title);
+      // console.log('apiResponse.body.items[0].volumeInfo.industryIdentifiers[0].identifier: ' , apiResponse.body.items[0].volumeInfo.industryIdentifiers[0].identifier);
+      // console.log('apiResponse.body.items[0].volumeInfo.imageLinks.smallThumbnail: ', apiResponse.body.items[0].volumeInfo.imageLinks.smallThumbnail);
+      // console.log('apiResponse.body.items[0].volumeInfo.authors[0]: ', apiResponse.body.items[0].volumeInfo.authors[0]);
+      // console.log('apiResponse.body.items[0].volumeInfo.description: ', apiResponse.body.items[0].volumeInfo.description);
     })
     .then(results => {
-      response.render('pages/searches/show', {searchResults: results})
+      console.log('right before render books');
+      console.log('results: ', results);
+      response.render('pages/searches/show', {searchResults: allBooks})
     })
     .catch(error => handleError(error, response));
 }
+
+
+// fill allBooks with 20 fake books
+function makeFakeData() {
+
+  allBooks = [];
+  const fakeBook = {
+    title: 'How to Do Everything Kindle Fire',
+    isbn: '9780071793605',
+    image_url: 'http://books.google.com/books/content?id=i4E0wOgHR4QC&printsec=frontcover&img=1&zoom=5&source=gbs_api',
+    author: [ 'Jason Rich' ],
+    description: 'Presents information on setting up and using the Kindle Fire, covering such topics as navigating Kindle books, connecting to the Internet, listening to music, managing Facebook and Twitter accounts, and downloading apps.'
+  }
+
+  for (let i = 0; i < 20; i++){
+    allBooks.push(fakeBook);
+  }
+}
+

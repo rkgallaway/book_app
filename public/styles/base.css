@@ -26,3 +26,20 @@ form {
     display: flex;
     justify-content: left;
 }
+
+section {
+    padding: 5px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    background-color: rgb(204, 182, 154);
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+section p {
+    margin: 5px;
+}
+
