@@ -1,0 +1,11 @@
+.book-list{
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 10px;
+  grid-auto-rows: auto;
+}
+
+.books{
+  background-color: gold;
+  border-radius: 3px;
+}

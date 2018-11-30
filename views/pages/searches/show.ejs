@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html>
- <head>
-    <%- include('../../partials/head') %> 
- </head>
-<body>
-    <header>
-      <%- include('../../partials/header') %>
-    </header>
+  <head>
+    <%- include('../../partials/head') %>
+  </head>
+  <body>
+    <header><%- include('../../partials/header') %></header>
     <main>
-      <ul>
-        <% searchResults.forEach(book => { %>
-          <ul>
-              <li> <%= book.title %> </li>
-          </ul>
-        <% }) %>
+      <ul class="book-list">
+          <% searchResults.forEach(book => { %>
+            <li class="books"><%= book.title %></li>
+          <% }) %>
       </ul>
     </main>
   </body>
- <footer>
-     <%- include('../../partials/footer') %>
- </footer>
+  <footer><%- include('../../partials/footer') %></footer>
 </html>
