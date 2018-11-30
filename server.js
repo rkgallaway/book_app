@@ -41,7 +41,7 @@ function Book(info) {
 // Error handler
 function handleError(err, res) {
   console.error(err);
-  if (res) res.status(500).send('Sorry, something went wrong');
+  res.render('pages/error.ejs', {error: 'Uh Oh'});
 }
 
 // No API key required
