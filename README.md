@@ -50,13 +50,33 @@ Actual time needed to complete: 2 hour 7 minutes
 +++++++++++++++++++++++++++++++++++++++++++
 Number and name of feature 3: Display search results
 
-Estimate of time needed to complete: ____
+Estimate of time needed to complete: 
 
-Start time: ____
+Start time: 29nov FL, JA, RG: 5:30/ 29nov RG 10pm/ 30novFL start 10:15
 
-Finish time: ____
+Finish time: 30novFL finish29nov FL, JA, RG: 7pm/ 29nov RG 11:30pm/ 30novFL start 11:45
 
-Actual time needed to complete: __
+Actual time needed to complete: 1.5 hours with all 3, and 1.5 hours each for RG and FL
+++++++++++++++++++++++++++++++++++++++++++++++++
+Number and name of feature 4: Error handling 
+
+Estimate of time needed to complete: 
+
+Start time:
+
+Finish time: 
+
+Actual time needed to complete: 
+++++++++++++++++++++++++++++++++++++++++++++++
+Number and name of feature 5: Style the book application
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 
+
+Finish time: 
+
+Actual time needed to complete: 
 
 ## Credits and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
