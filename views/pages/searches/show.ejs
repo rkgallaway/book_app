@@ -1,8 +1,27 @@
 <!DOCTYPE html>
 <html>
- <!-- head partial -->
+    <head>
+        <!-- head partial -->
+        <link rel="stylesheet" type="text/css" href="styles/reset.css">
+        <link rel="stylesheet" type="text/css" href="styles/base.css">
+    </head>
 
-<!-- TODO: add results loop here -->
+    <body>
+        
+            <% searchResults.forEach( (bookObj)=> { %>
+                <section>
+                    <img src=<%= bookObj.image_url %> />
+                    <h2><%= bookObj.title %></h2>
+                    <p><%= bookObj.author %></p>
+                    <p><%= bookObj.description %></p>
+                </section>
+            <% }); %>
 
- <!-- footer partial -->
+
+    </body>
+
+    <footer>
+         <!-- footer partial -->
+
+    </footer>
 </html>
