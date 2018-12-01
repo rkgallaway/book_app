@@ -28,15 +28,11 @@ let allBooks = [];
 function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = info.volumeInfo.title || 'No title available';
-  // this.isbn = info.volumeInfo.industryIdentifiers[0].identifier || info.volumeInfo.industryIdentifiers[1].identifier|| 'No ISBN available';
+  this.isbn = info.volumeInfo.industryIdentifiers ? info.volumeInfo.industryIdentifiers[0].identifier || info.volumeInfo.industryIdentifiers[1].identifier : 'No ISBN available';
   this.image_url = info.volumeInfo.imageLinks ? info.volumeInfo.imageLinks.smallThumbnail || info.volumeInfo.imageLinks.thumbnail : placeholderImage;
   this.author = info.volumeInfo.authors ? info.volumeInfo.authors : 'No author available';
-  // this.description = info.volumeInfo.description || 'No description available';
-  //need work on logic to give alt result to prevent break(s) 
-  //use terniary logic.  remember shorthand //also comment out some bits so we can SOMETHING to show.ejs
+  this.description = info.volumeInfo ? info.volumeInfo.description : 'No description available';
   allBooks.push(this);
-  console.log('allBooks array: ', allBooks)
-  console.log('this: ', this)
 }
 
 // ++++++++++++ HANDLERS ++++++++++++++++
@@ -67,7 +63,7 @@ function createSearch(request, response) {
 }
 
 
-// fill allBooks with 20 fake books
+// fill allBooks with 20 fake books //maybe useful kept for later, but not being used
 function makeFakeData() {
 
   allBooks = [];
