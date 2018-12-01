@@ -14,17 +14,44 @@ app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.use(express.urlencoded( {extended: true} ));
 
-//route for home view
+// route for home view
 app.get('/', (request, response) =>{
   response.render('pages/index.ejs');
 })
 
+// route for nav button that sends the user to the search page
+app.get('/goSearch', ((request, response) => {
+  console.log('search route hit');
+  // response.redirect('/');
+}));
+
+// route for nav button that sends the user to the home page
+app.get('/goHome', ((request, response) => {
+  console.log('home route hit');
+  // response.redirect('/');
+}));
+
+// app.get('/search', (request, response) => testRenderFromDB(request, response));
+
+
 //handler for POST request to /searches
 app.post('/searches', createSearch);
-
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
-let allBooks = [];
+
+// Database stuff
+const pg = require('pg');
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', (err) => handleError(err) );
+
+// Better logging:
+// replaces [object Object] with real info
+// use as follows: util.inspect( <object> )
+const util = require('util');
+
 // ++++++++++++ MODELS ++++++++++++++++
+let allBooks = [];
+
 function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = info.volumeInfo.title || 'No title available';
@@ -79,4 +106,49 @@ function makeFakeData() {
     allBooks.push(fakeBook);
   }
 }
+
+
+
+function testRenderFromDB(request, response) {
+  
+  const SQL = 'SELECT * FROM books WHERE title= $1;';
+  const values = ['How to Do Everything Kindle Fire'];
+  console.log(`SQL: ${SQL}`);
+  console.log(`values: ${values}`);
+
+  client.query(SQL, values)
+    .then((dbRes) => {
+      console.log(`dbRes.rows[0]: ${util.inspect(dbRes.rows[0])}`);
+
+      response.render('./pages/books/show', {bookObj: dbRes.rows[0]});
+    })
+    .then( () => {
+      // render pag
+    })
+    .catch( (err) => handleError(err) );
+
+}
+
+
+// psql create db
+// require pg
+// npm i pg
+// link via pg (dont env or hard code URL)
+
+// schema.sql
+// populate with fake data
+// queries:
+// query to see if data exists
+//    on exists do something
+//    else something else
+// query to add information
+// query to delete information
+
+// attach routes to certain queries?
+
+// if book exists in database , don't add it
+
+// save books
+// if book is saved, allow editing of information
+// allow the user the ability to save
 
