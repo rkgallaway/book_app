@@ -12,20 +12,10 @@
 
     <body>
         <header>
-            <div>
-                Fancy Book App
-            </div>
+           <%- include(./layout/header) %>
         </header>
         <main></main>
-            <!-- nav button -->
-            <form action="/goHome" method="get">
-                <button type="submit">Home</button>
-            </form>
-
-            <!-- nav button -->
-            <form action="/goSearch" method="get">
-                <button type="submit">Search</button>
-            </form>
+            
 
             <form action="/searches" method ="post">
                 <fieldset>
