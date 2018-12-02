@@ -18,8 +18,17 @@
                     <h2><%= bookObj.title %></h2>
                     <p><%= bookObj.author %></p>
                     <p><%= bookObj.description %></p>
+                    <!-- show details:  addition below is a start to reveal the details partial -->
+                    <form action="/details" method="post">
+                        <button type="submit">More Details</button>
+                    </form>
+                    <p><%= bookObj.isbn %></p>
+                    <p><%= bookObj.bookshelf %></p>
                 </section>
             <% }); %>
+               
+
+
             </main>
 
     </body>

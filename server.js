@@ -15,9 +15,10 @@ app.use(express.static('./public'));
 app.use(express.urlencoded( {extended: true} ));
 
 // route for home view
-app.get('/', (request, response) =>{
-  response.render('pages/index.ejs');
-})
+app.get('/', getDbBooks);
+// =>{
+//   response.render('pages/index.ejs');
+// })
 
 // route for nav button that sends the user to the search page
 app.get('/new_search', ((request, response) => {
@@ -32,9 +33,10 @@ app.get('/goHome', ((request, response) => {
 }));
 
 // app.get('/search', (request, response) => testRenderFromDB(request, response));
-
+// app.get('/', (request, response) => getDatabaseBooks(request, response));
 
 //handler for POST request to /searches
+// app.post('/', testRenderFromDB);
 app.post('/searches', createSearch);
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
@@ -59,9 +61,11 @@ function Book(info) {
   this.image_url = info.volumeInfo.imageLinks ? info.volumeInfo.imageLinks.smallThumbnail || info.volumeInfo.imageLinks.thumbnail : placeholderImage;
   this.author = info.volumeInfo.authors ? info.volumeInfo.authors : 'No author available';
   this.description = info.volumeInfo ? info.volumeInfo.description : 'No description available';
+  Book.bookshelf = 'not yet assigned';
   allBooks.push(this);
 }
 
+Book.bookshelf = 'not yet assigned';
 // ++++++++++++ HANDLERS ++++++++++++++++
 
 // Error handler
@@ -119,14 +123,24 @@ function testRenderFromDB(request, response) {
     .then((dbRes) => {
       console.log(`dbRes.rows[0]: ${util.inspect(dbRes.rows[0])}`);
 
-      response.render('./pages/books/show', {bookObj: dbRes.rows[0]});
+      response.render('pages/index.ejs', {bookObj: dbRes.rows[0]});  //as is, bookObj does not exist in index.ejs on page load
     })
-    .then( () => {
-      // render pag
-    })
+    // .then( () => {
+    //   // render pag
+    // })
     .catch( (err) => handleError(err) );
 
 }
+
+
+function getDbBooks(request, response){
+  let SQL = 'SELECT * from books;';
+  return client.query(SQL)
+    .then(results => response.render('pages/index.ejs', {showDbBooks: results.rows}))
+    .catch(handleError);
+}
+
+
 
 
 // psql create db

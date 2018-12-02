@@ -9,16 +9,15 @@
            <%- include('../layout/header') %>
         </header>
         <main>
-            <!-- nav button
-            <form action="/" method="get">
-                <button type="submit">Home</button>
-            </form> -->
-
-            <!-- nav button 
-            <form action="/new_search" method="get">
-                <button type="submit">Search</button>
-            </form> -->
-
+                <h2>My Books</h2>
+                <% showDbBooks.forEach( (bookObj) => { %>
+                    <section>
+                        <img src=<%= bookObj.image_url %> />
+                        <h2><%= bookObj.title %></h2>
+                        <p><%= bookObj.author %></p>
+                        <p><%= bookObj.description %></p>
+                    </section>
+                <% }); %>
         </main>
         <footer>
             <%- include('../layout/footer.ejs') %>
