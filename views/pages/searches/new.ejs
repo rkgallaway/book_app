@@ -5,20 +5,9 @@
     </head>
 
     <body>
-        <header>
-            <div>
-                Fancy Book App
-            </div>
-            <!-- TODO: replace these nav butons with header partial -->
-            <form action="/" method="get">
-                <button type="submit">Home</button>
-            </form>
-
-            <!-- nav button -->
-            <form action="/new_search" method="get">
-                <button type="submit">Search</button>
-            </form>
-        </header>
+<header>
+    <%- include(../../layout/header) %>
+ </header>
         <main></main>
             <form action="/searches" method ="post">
                 <fieldset>
