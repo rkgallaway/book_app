@@ -20,9 +20,9 @@ app.get('/', (request, response) =>{
 })
 
 // route for nav button that sends the user to the search page
-app.get('/goSearch', ((request, response) => {
+app.get('/new_search', ((request, response) => {
   console.log('search route hit');
-  // response.redirect('/');
+  response.render('pages/searches/new.ejs');
 }));
 
 // route for nav button that sends the user to the home page
@@ -106,7 +106,6 @@ function makeFakeData() {
     allBooks.push(fakeBook);
   }
 }
-
 
 
 function testRenderFromDB(request, response) {

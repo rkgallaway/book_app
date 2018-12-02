@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../../layout/head.ejs') %>
+    </head>
+
+    <body>
+        <header>
+            <div>
+                Fancy Book App
+            </div>
+            <!-- TODO: replace these nav butons with header partial -->
+            <form action="/" method="get">
+                <button type="submit">Home</button>
+            </form>
+
+            <!-- nav button -->
+            <form action="/new_search" method="get">
+                <button type="submit">Search</button>
+            </form>
+        </header>
+        <main></main>
+            <form action="/searches" method ="post">
+                <fieldset>
+
+                    <label> Search
+                        <input type="text" name="searchTerm"></input>    
+                    </label>
+                    <button type="submit">Go!</button>
+
+                    <label for="title">Search by Title 
+                        <input type="radio" name="searchRadio" value="title" required></input>
+                    </label>
+
+                    <label for="author">Search by Author
+                        <input type="radio" name="searchRadio" value="author" required></input>
+                    </label>
+
+                </fieldset>
+            </form>
+        </main>
+        <footer>
+            <%- include('../../layout/footer.ejs') %>
+        </footer>
+    </body>
+
+</html>

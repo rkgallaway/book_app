@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Book App</title>
-        <!-- TODO: add common head elements partial -->
-        <link rel="stylesheet" type="text/css" href="styles/reset.css">
-        <link rel="stylesheet" type="text/css" href="styles/base.css">
-        <link rel="stylesheet" type="text/css" href="styles/layout.css">
-
-        <!-- TODO: add favicon -->
+        <%- include('../layout/head.ejs') %>
     </head>
 
     <body>
@@ -18,36 +12,18 @@
         </header>
         <main></main>
             <!-- nav button -->
-            <form action="/goHome" method="get">
+            <form action="/" method="get">
                 <button type="submit">Home</button>
             </form>
 
             <!-- nav button -->
-            <form action="/goSearch" method="get">
+            <form action="/new_search" method="get">
                 <button type="submit">Search</button>
             </form>
 
-            <form action="/searches" method ="post">
-                <fieldset>
-
-                    <label> Search
-                        <input type="text" name="searchTerm"></input>    
-                    </label>
-                    <button type="submit">Go!</button>
-
-                    <label for="title">Search by Title 
-                        <input type="radio" name="searchRadio" value="title" required></input>
-                    </label>
-
-                    <label for="author">Search by Author
-                        <input type="radio" name="searchRadio" value="author" required></input>
-                    </label>
-
-                </fieldset>
-            </form>
         </main>
         <footer>
-            <div> &copy; 2018</div>
+            <%- include('../layout/footer.ejs') %>
         </footer>
     </body>
 
