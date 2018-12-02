@@ -57,8 +57,7 @@ function getOneBook(request, response) {
 
   return client.query(SQL, values)
     .then(result => {
-      console.log(result.rows[0]);
-      return response.render('pages/detailed-view', { book: result.rows[0] });
+      return response.render('pages/searches/detail-view', { book: result.rows[0] });
     })
     .catch(err => handleError(err, response));
 }
