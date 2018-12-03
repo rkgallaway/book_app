@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <%- include('../partials/head.ejs') %>
-    </head>
+  <head>
+    <%- include('../partials/head.ejs') %>
+  </head>
 
-    <body>
-        <header>
-            <%- include('../partials/header.ejs') %>
-            <%- include('../partials/nav.ejs') %>
-        </header>
+  <body>
+    <header><%- include('../partials/header.ejs') %></header>
+    <main>
+      <section class="flex-container">
+        <ul class="book-list" id="savedBooks">
+          <% results.forEach(book => { %>
+          <div class="books">
+            <li data-id="<%= book.id %>"></li>
+            <li><img src=<%= book.image_url %></li>
+            <li><h3>Book: <%= book.title %></h3></li>
+            <li><p>Author: <%= book.author %></p></li>
+            <li><a href="/books/<%= book.id %>">View Details</a></li>
+            <li><a href="/delete/<%= book.id %>">Delete Book</a></li>
+          </div>
+          <% }) %>
+        </ul>
+      </section>
+    </main>
 
-        <ul id="savedBooks">
-            <% results.forEach(book => { %>
-                <li data-id="<%= book.id %>">
-                    <h4>Book: <%= book.title %></h4>
-                    <p>Author: <%= book.author %></p>
-                    <a href="/books/<%= book.id %>">View Details</a>
-                    <a href="/delete/<%= book.id %>">Delete Book</a>
-                </li>
-            <% }) %>
-       </ul>
-
-        <footer>
-            <%- include('../partials/footer') %>
-        </footer>
-    </body>
-
+    <footer><%- include('../partials/footer') %></footer>
+  </body>
 </html>

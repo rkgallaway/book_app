@@ -1,18 +1,24 @@
 <form action="/searches" method ="post">
   <fieldset>
-
-      <label> Search
+    <div class="input-text">
+      <label> Search by Title or Author
           <input type="text" name="searchTerm"></input>    
       </label>
-      <button type="submit">Go!</button>
+    </div>
 
-      <label for="title">Search by Title 
+    <div class="input-radio">
+      <label for="title">Title 
           <input type="radio" name="searchRadio" value="title" required></input>
       </label>
+    </div>
 
-      <label for="author">Search by Author
+    <div class="input-radio">
+      <label for="author">Author
           <input type="radio" name="searchRadio" value="author" required></input>
       </label>
+    </div>
+
+      <button class="input-button" type="submit">Search the Google Books API</button>
 
   </fieldset>
 </form>

@@ -1,15 +1,14 @@
 * {
     /* outline: 1px solid black !important; */
-    margin: 5px;
+    margin: 0;
+    padding: 0;
 }
 html {
     /* width: 300px; */
 }
 
 body {
-    padding: 10px;
     background-color: rgb(199, 180, 180);
-    width: 300px;
 }
 
 fieldset {
@@ -21,8 +20,11 @@ input {
 }
 
 form {
-    padding: 10px;
     /* background-color: green; */
-    display: flex;
-    justify-content: left;
+    /* display: flex; */
+    /* justify-content: left; */
+}
+
+form label {
+    /* display: block; */
 }
