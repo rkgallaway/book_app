@@ -143,3 +143,41 @@ function testRenderFromDB(request, response) {
     .catch( (err) => handleError(err) );
 
 }
+
+
+//loads all saved books on page load
+function getDbBooks(request, response){
+  let SQL = 'SELECT * from books;';
+  return client.query(SQL)
+    .then(results => response.render('pages/', {showDbBooks: results.rows}))
+    .catch(handleError);
+}
+
+//shows details of saved books on user click ///not working began 11 am at 11:25 need to eat
+//refrenced from to-do app ---see pendingForIndex.html file for other pieces possible of code for the index.ejs file
+function getOneDbBookDetails(request, response) {
+  let SQL = 'SELECT * FROM tasks WHERE id=$1;';
+  let values = [request.params.books_id];  //I think this will be just .id not books_id (in to-do app it was task_id)
+
+  return client.query(SQL, values)
+    .then(result => {
+      // console.log('single', result.rows[0]);
+      return response.render('pages/detail', {bookObj: result.rows[0]}); //not sure about where to render.  reveal partial on same page, or redirect?
+    })
+    .catch(err => handleError(err, response));
+}
+
+
+//sourced template from to-do app
+function saveBook(request, response) { //needs route w/ callback
+  console.log(request.body);
+  let {title, isbn, image_url, author, description} = request.body;
+
+  let SQL = 'INSERT INTO books(title, isbn, image_url, author, description) VALUES ($1, $2, $3, $4, $5);';
+  let values = [title, isbn, image_url, author, description];
+
+  return client.query(SQL, values)
+    .then(response.redirect('pages/'))  //not sure on redirect route. essentially a design decision.  could take us to index to view saved books or wherve?
+    .catch(err => handleError(err, response));
+}
+

@@ -11,6 +11,7 @@
 
             <main>
                 <h2>Search Results</h2>
+
                 <% searchResults.forEach( (bookObj)=> { %>
                     <section>
                         <img src=<%= bookObj.image_url %> />
@@ -27,6 +28,7 @@
                         <p><%= bookObj.bookshelf %></p>
                     </section>
                 <% }); %>
+
             </main>
 
     </body>
