@@ -156,14 +156,11 @@ function getDbBooks(request, response){
 //shows details of saved books on user click ///not working began 11 am at 11:25 need to eat
 //refrenced from to-do app ---see pendingForIndex.html file for other pieces possible of code for the index.ejs file
 function getOneDbBookDetails(request, response) {
-  let SQL = 'SELECT * FROM tasks WHERE id=$1;';
-  let values = [request.params.books_id];  //I think this will be just .id not books_id (in to-do app it was task_id)
-
-  return client.query(SQL, values)
-    .then(result => {
-      // console.log('single', result.rows[0]);
-      return response.render('pages/detail', {bookObj: result.rows[0]}); //not sure about where to render.  reveal partial on same page, or redirect?
-    })
+  // console.log('in book detail route');
+  let SQL = 'SELECT * FROM books WHERE id=$1;';
+  let values = [request.params.id];
+   return client.query(SQL, values)
+    .then( (result) => response.render('pages/books/show', {bookObj: result.rows[0]}) )
     .catch(err => handleError(err, response));
 }
 
