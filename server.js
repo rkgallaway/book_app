@@ -185,13 +185,14 @@ function getOneDbBookDetails(request, response) {
 //sourced template from to-do app
 function saveBook(request, response) { //needs route w/ callback
   console.log(request.body);
-  let {title, isbn, image_url, author, description} = request.body;
+  let {title, isbn, image_url, author, description, bookshelf} = request.body;
 
-  let SQL = 'INSERT INTO books(title, isbn, image_url, author, description) VALUES ($1, $2, $3, $4, $5);';
-  let values = [title, isbn, image_url, author, description];
+  let SQL = 'INSERT INTO books(title, isbn, image_url, author, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+  let values = [title, isbn, image_url, author, description, bookshelf];
 
   return client.query(SQL, values)
-    .then(response.redirect('pages/index.ejs'))  //not sure on redirect route. essentially a design decision.  could take us to index to view saved books or wherve?
+    .then(response.redirect('/'))  //not sure on redirect route. essentially a design decision.  could take us to index to view saved books or wherve?
+
     .catch(err => handleError(err, response));
 }
 
