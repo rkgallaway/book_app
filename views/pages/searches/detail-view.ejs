@@ -11,13 +11,15 @@
       </header>
       <main>
           <ul>
-            <li><img href="<%= book.image_url %>"></li>
+            <li><img src="<%= book.image_url %>"></li>
             <li>Book: <%= book.title %></li>
             <li>Author: <%= book.author %></li>
             <li>Description: <%= book.description %></li>
             <li>ISBN: <%= book.isbn %></li>
             <li>Bookshelf: <%= book.bookshelf %></li>
           </ul>
+
+          <%- include('../../partials/detail-form', {formAction: 'update', book: book}) %>
 
       </main>
 

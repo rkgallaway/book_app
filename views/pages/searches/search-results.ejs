@@ -12,7 +12,9 @@
       <ul class="book-list">
           <% searchResults.forEach(book => { %>
             <li class="books"><%= book.title %></li>
+            <%- include('../../partials/detail-form', {formAction: 'save', book: book}) %>
           <% }) %>
+
       </ul>
     </main>
   </body>
