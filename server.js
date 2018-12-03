@@ -14,7 +14,7 @@ app.use(express.static('./public'));
 app.use(express.urlencoded( {extended: true} ));
 
 //route for home view
-app.get('/', (request, response) =>{
+app.get('/', (request, response) => {
   response.render('pages/index.ejs');
 })
 
