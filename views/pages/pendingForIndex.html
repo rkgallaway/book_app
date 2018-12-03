@@ -5,7 +5,10 @@
         <p><%= book.author %></p>
         <p><%= book.description %></p>
         <!-- <a href="/tasks/<%= task.id%>">View Details</a> FOR LATER FEATURE REFERENCED FROM TO DO APP-->
+        <a href="books/<%= detail.id%>">View Details</a>  <!--tried inserting into index.ejs after line 18, doesn't recognize detail-->
+
     </section>
 <% }); %>
 
+<%- include('../books/detail.ejs') %> <!--need to include on click logic-->
 

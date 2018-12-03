@@ -36,7 +36,7 @@ app.get('/goHome', ((request, response) => {
 // app.get('/', (request, response) => getDatabaseBooks(request, response));
 
 //handler for POST request to /searches
-// app.post('/', testRenderFromDB);
+app.post('/', getOneDbBookDetails);
 app.post('/searches', createSearch);
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
@@ -132,14 +132,27 @@ function testRenderFromDB(request, response) {
 
 }
 
-
+//loads all saved books on page load
 function getDbBooks(request, response){
   let SQL = 'SELECT * from books;';
   return client.query(SQL)
-    .then(results => response.render('pages/index.ejs', {showDbBooks: results.rows}))
+    .then(results => response.render('pages/', {showDbBooks: results.rows}))
     .catch(handleError);
 }
 
+//shows details of saved books on user click ///not working began 11 am at 11:25 need to eat
+//refrenced from to-do app ---see pendingForIndex.html file for other pieces possible of code for the index.ejs file
+function getOneDbBookDetails(request, response) {
+  let SQL = 'SELECT * FROM tasks WHERE id=$1;';
+  let values = [request.params.books_id];  //I think this will be just .id not books_id (in to-do app it was task_id)
+
+  return client.query(SQL, values)
+    .then(result => {
+      // console.log('single', result.rows[0]);
+      return response.render('pages/detail', {bookObj: result.rows[0]}); //not sure about where to render.  reveal partial on same page, or redirect?
+    })
+    .catch(err => handleError(err, response));
+}
 
 
 
