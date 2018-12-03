@@ -178,3 +178,15 @@ function getOneDbBookDetails(request, response) {
 // if book is saved, allow editing of information
 // allow the user the ability to save
 
+//sourced template from to-do app
+function saveBook(request, response) { //needs route w/ callback
+  console.log(request.body);
+  let {title, isbn, image_url, author, description} = request.body;
+
+  let SQL = 'INSERT INTO books(title, isbn, image_url, author, description) VALUES ($1, $2, $3, $4, $5);';
+  let values = [title, isbn, image_url, author, description];
+
+  return client.query(SQL, values)
+    .then(response.redirect('pages/'))  //not sure on redirect route. essentially a design decision.  could take us to index to view saved books or wherve?
+    .catch(err => handleError(err, response));
+}
