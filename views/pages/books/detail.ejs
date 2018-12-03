@@ -1,4 +1,7 @@
-<p><%= bookObj.isbn %></p>
-<p><%= bookObj.bookshelf %></p> 
-
-<!-- needs logic if inserted and shown using partial, the existing bookObj is not relevant -->
+<section data-id=<%= bookObj.id %>>
+    <img src=<%= bookObj.image_url %> />
+    <h2><%= bookObj.title %></h2>
+    <p><%= bookObj.author %></p>
+    <p><%= bookObj.description %></p>
+    <p>Database ID: <%= bookObj.id %> (remove this later)</p>
+</section>

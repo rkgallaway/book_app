@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%- include('../../layout/head.ejs') %>
+        <%- include('../../layout/head') %>
     </head>
 
     <body>
+            <header>
+                <%- include('../../layout/header') %>
+            </header>
 
-        <form action="/home" method="get">
-            <label>
-                <input type="button" name="searchButton"/>
-            </label>
-        </form>
-        <button></button>
-        <p><%= bookObj.author %></p>
-        <p><%= bookObj.title %></p>
-        <p><%= bookObj.isbn %></p>
-        <p><%= bookObj.author %></p>
-        <img src=<%= bookObj.image_url %> />
+            <main>
+                <h2> Book Details </h2>
+                <%- include('detail') %>
+            </main>
+
     </body>
 
     <footer>
-        <%- include('../../layout/footer.ejs') %>
+        <%- include('../../layout/footer') %>
     </footer>
 </html>

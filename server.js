@@ -16,9 +16,6 @@ app.use(express.urlencoded( {extended: true} ));
 
 // route for home view
 app.get('/', getDbBooks);
-// =>{
-//   response.render('pages/index.ejs');
-// })
 
 // route for nav button that sends the user to the search page
 app.get('/new_search', ((request, response) => {
@@ -26,17 +23,11 @@ app.get('/new_search', ((request, response) => {
   response.render('pages/searches/new.ejs');
 }));
 
-// route for nav button that sends the user to the home page
-app.get('/goHome', ((request, response) => {
-  console.log('home route hit');
-  // response.redirect('/');
-}));
-
 // app.get('/search', (request, response) => testRenderFromDB(request, response));
 // app.get('/', (request, response) => getDatabaseBooks(request, response));
 
 //handler for POST request to /searches
-app.post('/', getOneDbBookDetails);
+app.get('/books/:id', getOneDbBookDetails); // detail view
 app.post('/searches', createSearch);
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
@@ -47,8 +38,7 @@ client.connect();
 client.on('error', (err) => handleError(err) );
 
 // Better logging:
-// replaces [object Object] with real info
-// use as follows: util.inspect( <object> )
+// replaces [object Object] with real info, use as follows: util.inspect( <object> )
 const util = require('util');
 
 // ++++++++++++ MODELS ++++++++++++++++
@@ -93,6 +83,29 @@ function createSearch(request, response) {
     .catch(error => handleError(error, response))
 }
 
+//loads all saved books on page load
+function getDbBooks(request, response){
+  let SQL = 'SELECT * from books;';
+  return client.query(SQL)
+    .then( (results) => {
+      console.log('adding books to the home page from the DB');
+      // console.log(util.inspect(results.rows));
+      response.render('pages/', {showDbBooks: results.rows});
+    })
+    .catch( (error) => handleError(error) );
+}
+
+//shows details of saved books on user click ///not working began 11 am at 11:25 need to eat
+//refrenced from to-do app ---see pendingForIndex.html file for other pieces possible of code for the index.ejs file
+function getOneDbBookDetails(request, response) {
+  // console.log('in book detail route');
+  let SQL = 'SELECT * FROM books WHERE id=$1;';
+  let values = [request.params.id];
+
+  return client.query(SQL, values)
+    .then( (result) => response.render('pages/books/show', {bookObj: result.rows[0]}) )
+    .catch(err => handleError(err, response));
+}
 
 // fill allBooks with 20 fake books //maybe useful kept for later, but not being used
 function makeFakeData() {
@@ -110,7 +123,6 @@ function makeFakeData() {
     allBooks.push(fakeBook);
   }
 }
-
 
 function testRenderFromDB(request, response) {
   
@@ -131,6 +143,7 @@ function testRenderFromDB(request, response) {
     .catch( (err) => handleError(err) );
 
 }
+
 
 //loads all saved books on page load
 function getDbBooks(request, response){
@@ -155,29 +168,6 @@ function getOneDbBookDetails(request, response) {
 }
 
 
-
-// psql create db
-// require pg
-// npm i pg
-// link via pg (dont env or hard code URL)
-
-// schema.sql
-// populate with fake data
-// queries:
-// query to see if data exists
-//    on exists do something
-//    else something else
-// query to add information
-// query to delete information
-
-// attach routes to certain queries?
-
-// if book exists in database , don't add it
-
-// save books
-// if book is saved, allow editing of information
-// allow the user the ability to save
-
 //sourced template from to-do app
 function saveBook(request, response) { //needs route w/ callback
   console.log(request.body);
@@ -190,3 +180,4 @@ function saveBook(request, response) { //needs route w/ callback
     .then(response.redirect('pages/'))  //not sure on redirect route. essentially a design decision.  could take us to index to view saved books or wherve?
     .catch(err => handleError(err, response));
 }
+

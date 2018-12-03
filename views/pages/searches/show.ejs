@@ -11,23 +11,23 @@
 
             <main>
                 <h2>Search Results</h2>
-        
-            <% searchResults.forEach( (bookObj)=> { %>
-                <section>
-                    <img src=<%= bookObj.image_url %> />
-                    <h2><%= bookObj.title %></h2>
-                    <p><%= bookObj.author %></p>
-                    <p><%= bookObj.description %></p>
-                   
-                    <form action="/details" method="post">
-                        <button type="submit">More Details</button>
-                    </form>
-                    <p><%= bookObj.isbn %></p>
-                    <p><%= bookObj.bookshelf %></p>
-                </section>
-            <% }); %>
-               
 
+                <% searchResults.forEach( (bookObj)=> { %>
+                    <section>
+                        <img src=<%= bookObj.image_url %> />
+                        <h2><%= bookObj.title %></h2>
+                        <p><%= bookObj.author %></p>
+                        <p><%= bookObj.description %></p>
+                        <!-- show details:  addition below is a start to reveal the details partial -->
+                        <!-- or could reroute to a new details page for the individual book and use a back button to retun to the list of bookshelf
+                        https://www.w3schools.com/jsref/met_his_back.asp -->
+                        <form action="/details" method="post">
+                            <button type="submit">More Details</button>
+                        </form>
+                        <p><%= bookObj.isbn %></p>
+                        <p><%= bookObj.bookshelf %></p>
+                    </section>
+                <% }); %>
 
             </main>
 
