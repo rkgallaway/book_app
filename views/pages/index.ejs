@@ -5,25 +5,21 @@
     </head>
 
     <body>
+        <header>
+            <%- include('../partials/header.ejs') %>
+            <%- include('../partials/nav.ejs') %>
+        </header>
 
-        <form action="/searches" method ="post">
-            <fieldset>
+        <ul id="savedBooks">
+            <% results.forEach(book => { %>
+                <li data-id="<%= book.id %>">
+                    <h4>Book: <%= book.title %></h4>
+                    <p>Author: <%= book.author %></p>
+                    <a href="/books/<%= book.id %>">View Details</a>
+                </li>
+            <% }) %>
+       </ul>
 
-                <label> Search
-                    <input type="text" name="searchTerm"></input>    
-                </label>
-                <button type="submit">Go!</button>
-
-                <label for="title">Search by Title 
-                    <input type="radio" name="searchRadio" value="title" required></input>
-                </label>
-
-                <label for="author">Search by Author
-                    <input type="radio" name="searchRadio" value="author" required></input>
-                </label>
-
-            </fieldset>
-        </form>
         <footer>
             <%- include('../partials/footer') %>
         </footer>

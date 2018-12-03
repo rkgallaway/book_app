@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/rkgallaway/book_app.git"
   },
-  "author": "Ryan Gallaway and Fletcher LaRue",
+  "author": "Jacob Anderson and Tyler Hood",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rkgallaway/book_app/issues"
@@ -22,6 +22,7 @@
     "dotenv": "^6.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "pg": "^7.7.1",
     "superagent": "^4.0.0"
   }
 }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../../partials/head.ejs') %>
+    </head>
+
+    <body>
+      <header>
+          <%- include('../../partials/header.ejs') %>
+          <%- include('../../partials/nav.ejs') %>
+      </header>
+      <main>
+          <ul>
+            <li><img href="<%= book.image_url %>"></li>
+            <li>Book: <%= book.title %></li>
+            <li>Author: <%= book.author %></li>
+            <li>Description: <%= book.description %></li>
+            <li>ISBN: <%= book.isbn %></li>
+            <li>Bookshelf: <%= book.bookshelf %></li>
+          </ul>
+
+      </main>
+
+        <footer>
+            <%- include('../../partials/footer') %>
+        </footer>
+    </body>
+
+</html>
