@@ -9,7 +9,6 @@ html {
 
 body {
     background-color: rgb(199, 180, 180);
-    width: 300px;
 }
 
 fieldset {
@@ -23,7 +22,7 @@ input {
 form {
     /* background-color: green; */
     /* display: flex; */
-    justify-content: left;
+    /* justify-content: left; */
 }
 
 form label {

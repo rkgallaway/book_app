@@ -1,17 +1,3 @@
-.book-list {
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto;
-  grid-gap: 10px;
-  grid-auto-rows: auto;
-}
-
-.books {
-  width: 100%;
-  background-color: gold;
-  border-radius: 3px;
-}
-
 .header {
   width: 100%;
   height: 100px;
@@ -71,4 +57,33 @@ div.input-radio label {
 
 div.input-radio label input{
   margin-left: 10px;
+}
+
+.flex-container {
+  display: flex;
+
+  margin: auto;
+}
+.book-list {
+  display:flex;
+  flex-direction: column;
+  height: auto;
+}
+.book-list img{
+  width: 250px;
+  height: auto;
+}
+.books {
+  height: 500px;
+  width: 100%;
+  background-color: gold;
+  border-radius: 3px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.books li {
+  margin: auto;
+
 }

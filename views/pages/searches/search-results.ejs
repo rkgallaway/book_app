@@ -4,15 +4,19 @@
     <%- include('../../partials/head') %>
   </head>
   <body>
-    <header>
-      <%- include('../../partials/header') %>
-    </header>
+    <header><%- include('../../partials/header') %></header>
     <main>
-      <ul class="book-list">
+      <section class="flex-container">
+        <ul class="book-list">
           <% searchResults.forEach(book => { %>
-            <li class="books"><%= book.title %></li>
+          <div class="books">
+            <li><img src=<%= book.image_url %>></li>
+            <li><h3><%= book.title %></h3></li>
+            <li><p><%= book.author %></p></li>
+          </div>
           <% }) %>
-      </ul>
+        </ul>
+      </section>
     </main>
   </body>
   <footer><%- include('../../partials/footer') %></footer>

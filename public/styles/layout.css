@@ -7,6 +7,12 @@ main {
   background-color: grey;
 }
 
+section {
+  /* justify-content: center; */
+  display: flex;
+  width: 80%;
+}
+
 footer {
   width: 100%
 }
