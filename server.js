@@ -43,6 +43,7 @@ app.put('/books/:id', editBookDetails ) // update book (from detail page)
 app.delete('/books/:id', deleteBook) // delete book (from detail page)
 
 app.post('/searches', createSearch);
+app.post('/books', saveBook);
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 // Database stuff
@@ -190,7 +191,7 @@ function saveBook(request, response) { //needs route w/ callback
   let values = [title, isbn, image_url, author, description];
 
   return client.query(SQL, values)
-    .then(response.redirect('pages/'))  //not sure on redirect route. essentially a design decision.  could take us to index to view saved books or wherve?
+    .then(response.redirect('pages/index.ejs'))  //not sure on redirect route. essentially a design decision.  could take us to index to view saved books or wherve?
     .catch(err => handleError(err, response));
 }
 
