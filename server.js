@@ -3,6 +3,7 @@
 const express = require('express');
 const superagent = require('superagent');
 const app = express();
+const methodOverride = require('method-override');
 
 require('dotenv').config();
 const PORT = process.env.PORT;
@@ -13,6 +14,16 @@ app.set('view engine', 'ejs');
 //showing app where to find resources
 app.use(express.static('./public'));
 app.use(express.urlencoded( {extended: true} ));
+
+// Middleware to handle PUT and DELETE requests
+app.use(methodOverride((request, response) => {
+  if (request.body && typeof request.body === 'object' && '_method' in request.body) {
+    // look in urlencoded POST bodies and delete it
+    let method = request.body._method;
+    delete request.body._method;
+    return method;
+  }
+}))
 
 // route for home view
 app.get('/', getDbBooks);
@@ -27,7 +38,10 @@ app.get('/new_search', ((request, response) => {
 // app.get('/', (request, response) => getDatabaseBooks(request, response));
 
 //handler for POST request to /searches
-app.get('/books/:id', getOneDbBookDetails); // detail view
+app.get('/books/:id', getOneDbBookDetails); // load the detail view (from home page)
+app.put('/books/:id', editBookDetails ) // update book (from detail page)
+app.delete('/books/:id', deleteBook) // delete book (from detail page)
+
 app.post('/searches', createSearch);
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
@@ -40,6 +54,8 @@ client.on('error', (err) => handleError(err) );
 // Better logging:
 // replaces [object Object] with real info, use as follows: util.inspect( <object> )
 const util = require('util');
+
+
 
 // ++++++++++++ MODELS ++++++++++++++++
 let allBooks = [];
@@ -178,3 +194,40 @@ function saveBook(request, response) { //needs route w/ callback
     .catch(err => handleError(err, response));
 }
 
+
+function editBookDetails(request, response) {
+  console.log('edit book details called');
+  // console.log('request body: ', request.body);
+  // console.log('request params: ', request.params.id);
+  let SQL = `UPDATE books SET title=$1, isbn=$2, image_url=$3, author=$4, description=$5, bookshelf=$6 WHERE id=${request.params.id};`;
+  let values = [
+    request.body.title,
+    request.body.isbn,
+    request.body.image_url,
+    request.body.author,
+    request.body.description,
+    request.body.bookshelf];
+  // console.log('SQL: ', SQL);
+  // console.log('values: ', values);
+  client.query(SQL, values)
+    .then( () => {
+      // console.log('db response done');
+      response.redirect(`/books/${request.params.id}`); // redirect to book detail page
+    })
+    .catch(err => handleError(err, response));
+  return;
+
+
+}
+
+function deleteBook(request, response) {
+  // console.log('delete book called');
+  let SQL = 'DELETE FROM books WHERE id=$1;';
+  let values = [request.params.id];
+
+  return client.query(SQL, values)
+    .then( () => {
+      response.redirect('/');
+    })
+    .catch(err => handleError(err, response));
+}
