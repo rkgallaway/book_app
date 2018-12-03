@@ -7,10 +7,9 @@
     <body>
         <header>
             <%- include('../partials/header.ejs') %>
-        </header>
-        <nav>
             <%- include('../partials/nav.ejs') %>
-        </nav>
+        </header>
+
         <ul id="savedBooks">
             <% results.forEach(book => { %>
                 <li data-id="<%= book.id %>">
