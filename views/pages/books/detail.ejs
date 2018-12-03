@@ -3,5 +3,43 @@
     <h2><%= bookObj.title %></h2>
     <p><%= bookObj.author %></p>
     <p><%= bookObj.description %></p>
+    <p>ISBN: <%= bookObj.isbn %></p>
+    <p>Bookshelf: <%= bookObj.bookshelf %></p>
     <p>Database ID: <%= bookObj.id %> (remove this later)</p>
+
+    <!-- show edit fields -->
+    <p>.</p>
+    <p>.</p>
+    <p>Reveals the edit form</p>
+    <input type="button" value="Update Details"/>
+
+    <form action="/books/<%= bookObj.id %>" method ="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit" value="">Delete this book</button>
+    </form>
+
+    <!-- sourced from to-do app //textarea may need attention-->
+    <form id="create-form" action="/books/<%= bookObj.id %>" method="post"> <!--toggle action?-->
+        <input type="hidden" name="_method" value="put" />
+        <input type="hidden" name="image_url" value="<%= bookObj.image_url %>" />
+        <fieldset>
+            <legend>Edit Book Details</legend>
+            <label for="title">Title:</label>
+            <input type="text" name="title" value="<%= bookObj.title %>" placeholder="<%= bookObj.title %>">
+            <label for="author">Author:</label>
+            <input type="text" name="author" value="<%= bookObj.author %>" placeholder="<%= bookObj.author %>">
+            <label for="description">Description:</label>
+            <input name="description" value="<%= bookObj.description %>" placeholder="<%= bookObj.description %>" cols="30" rows="10"></input>
+            <br>   <!--remove later with css applying to form-->
+            <label for="bookshelf">Bookshelf:</label>
+            <input type="text" name="bookshelf" value="<%=bookObj.bookshelf%>" placeholder="<%=bookObj.bookshelf%>" required>
+            <label for="isbn">ISBN:</label>
+            <input type="text" name="isbn" value="<%= bookObj.isbn %>" placeholder="<%= bookObj.isbn %>">
+            <p>Route: app.put(/books/:id)</p>
+            <p>use method-override</p>
+            <button type="submit">Save Changes</button>
+        </fieldset>
+    </form>
+
+
 </section>
