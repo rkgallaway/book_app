@@ -118,4 +118,6 @@ section p {
     margin: 5px;
 }
 
-
+.bookDetails {
+    display: none;
+}
