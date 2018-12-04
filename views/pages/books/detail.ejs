@@ -26,9 +26,10 @@
             <input type="text" name="title" value="<%= bookObj.title %>" placeholder="<%= bookObj.title %>">
             <label for="author">Author:</label>
             <input type="text" name="author" value="<%= bookObj.author %>" placeholder="<%= bookObj.author %>">
+            <!-- <label for="description">Description:</label>
+            <input type="text" class="description" name="description" value="<%= bookObj.description %>" placeholder="<%= bookObj.description %>"> -->
             <label for="description">Description:</label>
-            <input name="description" value="<%= bookObj.description %>" placeholder="<%= bookObj.description %>" cols="30" rows="10"></input>
-            <br>   <!--remove later with css applying to form-->
+            <textarea type="text" class="description" name="description" value="<%= bookObj.description %>" placeholder="Enter description" rows="10" cols="40"><%= bookObj.description %></textarea>
             <label for="bookshelf">Bookshelf:</label>
             <input type="text" name="bookshelf" value="<%=bookObj.bookshelf%>" placeholder="<%=bookObj.bookshelf%>" required>
             <label for="isbn">ISBN:</label>
