@@ -9,14 +9,14 @@
            <%- include('../layout/header') %>
         </header>
         <main>
-            <h2>My Books</h2>
             <% showDbBooks.forEach( (bookObj) => { %>
+                <h2><%= showDbBooks.length %> Saved Books</h2>  
+
                 <section data-id=<%= bookObj.id %>>
                     <img src=<%= bookObj.image_url %> />
                     <h2><%= bookObj.title %></h2>
                     <p><%= bookObj.author %></p>
                     <p><%= bookObj.description %></p>
-                    <p>Database ID: <%= bookObj.id %> (remove this later)</p>
                     <a href="/books/<%= bookObj.id %>" >
                         <input type="submit" value="Detail View"></input>
                     </a>

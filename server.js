@@ -34,16 +34,13 @@ app.get('/new_search', ((request, response) => {
   response.render('pages/searches/new.ejs');
 }));
 
-// app.get('/search', (request, response) => testRenderFromDB(request, response));
-// app.get('/', (request, response) => getDatabaseBooks(request, response));
-
 //handler for POST request to /searches
 app.get('/books/:id', getOneDbBookDetails); // load the detail view (from home page)
 app.put('/books/:id', editBookDetails ) // update book (from detail page)
 app.delete('/books/:id', deleteBook) // delete book (from detail page)
 
 app.post('/searches', createSearch);
-app.post('/books', saveBook);
+app.put('/books', saveBook);
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 // Database stuff
@@ -73,6 +70,7 @@ function Book(info) {
 }
 
 Book.bookshelf = 'not yet assigned';
+
 // ++++++++++++ HANDLERS ++++++++++++++++
 
 // Error handler
@@ -85,15 +83,8 @@ function handleError(error, response) {
 // No API key required
 function createSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-
-  console.log('~~~~~~~~~~~~~~~~~~');
-  // console.log('request.body: ', request.body);
-
   if (request.body.searchRadio === 'title') { url += `+intitle:${request.body.searchTerm}&maxResults=20`; }
   if (request.body.searchRadio === 'author') { url += `+inauthor:${request.body.searchTerm}&maxResults=20`; }
-
-  console.log('url: ' , url);
-  console.log('~~~~~~~~~~~~~~~~~~');
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult)))
     .then(results => response.render('pages/searches/show', {searchResults: results}))
@@ -105,17 +96,12 @@ function getDbBooks(request, response){
   let SQL = 'SELECT * from books;';
   return client.query(SQL)
     .then( (results) => {
-      console.log('adding books to the home page from the DB');
-      // console.log(util.inspect(results.rows));
       response.render('pages/', {showDbBooks: results.rows});
     })
     .catch( (error) => handleError(error) );
-}
 
-//shows details of saved books on user click ///not working began 11 am at 11:25 need to eat
-//refrenced from to-do app ---see pendingForIndex.html file for other pieces possible of code for the index.ejs file
+}
 function getOneDbBookDetails(request, response) {
-  // console.log('in book detail route');
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.id];
 
@@ -124,83 +110,20 @@ function getOneDbBookDetails(request, response) {
     .catch(err => handleError(err, response));
 }
 
-// fill allBooks with 20 fake books //maybe useful kept for later, but not being used
-function makeFakeData() {
-
-  allBooks = [];
-  const fakeBook = {
-    title: 'How to Do Everything Kindle Fire',
-    isbn: '9780071793605',
-    image_url: 'http://books.google.com/books/content?id=i4E0wOgHR4QC&printsec=frontcover&img=1&zoom=5&source=gbs_api',
-    author: [ 'Jason Rich' ],
-    description: 'Presents information on setting up and using the Kindle Fire, covering such topics as navigating Kindle books, connecting to the Internet, listening to music, managing Facebook and Twitter accounts, and downloading apps.'
-  }
-
-  for (let i = 0; i < 20; i++){
-    allBooks.push(fakeBook);
-  }
-}
-
-function testRenderFromDB(request, response) {
-  
-  const SQL = 'SELECT * FROM books WHERE title= $1;';
-  const values = ['How to Do Everything Kindle Fire'];
-  console.log(`SQL: ${SQL}`);
-  console.log(`values: ${values}`);
-
-  client.query(SQL, values)
-    .then((dbRes) => {
-      console.log(`dbRes.rows[0]: ${util.inspect(dbRes.rows[0])}`);
-
-      response.render('pages/index.ejs', {bookObj: dbRes.rows[0]});  //as is, bookObj does not exist in index.ejs on page load
-    })
-    // .then( () => {
-    //   // render pag
-    // })
-    .catch( (err) => handleError(err) );
-
-}
-
-
-//loads all saved books on page load
-function getDbBooks(request, response){
-  let SQL = 'SELECT * from books;';
-  return client.query(SQL)
-    .then(results => response.render('pages/', {showDbBooks: results.rows}))
-    .catch(handleError);
-}
-
-//shows details of saved books on user click ///not working began 11 am at 11:25 need to eat
-//refrenced from to-do app ---see pendingForIndex.html file for other pieces possible of code for the index.ejs file
-function getOneDbBookDetails(request, response) {
-  // console.log('in book detail route');
-  let SQL = 'SELECT * FROM books WHERE id=$1;';
-  let values = [request.params.id];
-   return client.query(SQL, values)
-    .then( (result) => response.render('pages/books/show', {bookObj: result.rows[0]}) )
-    .catch(err => handleError(err, response));
-}
 
 
 //sourced template from to-do app
-function saveBook(request, response) { //needs route w/ callback
-  console.log(request.body);
+function saveBook(request, response) {
   let {title, isbn, image_url, author, description, bookshelf} = request.body;
-
   let SQL = 'INSERT INTO books(title, isbn, image_url, author, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
   let values = [title, isbn, image_url, author, description, bookshelf];
-
   return client.query(SQL, values)
-    .then(response.redirect('/'))  //not sure on redirect route. essentially a design decision.  could take us to index to view saved books or wherve?
-
+    .then(response.redirect('/'))
     .catch(err => handleError(err, response));
 }
 
 
 function editBookDetails(request, response) {
-  console.log('edit book details called');
-  // console.log('request body: ', request.body);
-  // console.log('request params: ', request.params.id);
   let SQL = `UPDATE books SET title=$1, isbn=$2, image_url=$3, author=$4, description=$5, bookshelf=$6 WHERE id=${request.params.id};`;
   let values = [
     request.body.title,
@@ -209,24 +132,17 @@ function editBookDetails(request, response) {
     request.body.author,
     request.body.description,
     request.body.bookshelf];
-  // console.log('SQL: ', SQL);
-  // console.log('values: ', values);
   client.query(SQL, values)
     .then( () => {
-      // console.log('db response done');
-      response.redirect(`/books/${request.params.id}`); // redirect to book detail page
+      response.redirect(`/`); 
     })
     .catch(err => handleError(err, response));
   return;
-
-
 }
 
 function deleteBook(request, response) {
-  // console.log('delete book called');
   let SQL = 'DELETE FROM books WHERE id=$1;';
   let values = [request.params.id];
-
   return client.query(SQL, values)
     .then( () => {
       response.redirect('/');
