@@ -9,9 +9,8 @@
            <%- include('../layout/header') %>
         </header>
         <main>
+            <h3><%= showDbBooks.length %> Saved Books</h3>  
             <% showDbBooks.forEach( (bookObj) => { %>
-                <h2><%= showDbBooks.length %> Saved Books</h2>  
-
                 <section data-id=<%= bookObj.id %>>
                     <img src=<%= bookObj.image_url %> />
                     <h2><%= bookObj.title %></h2>

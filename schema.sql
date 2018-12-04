@@ -6,13 +6,12 @@ CREATE TABLE books(
     isbn VARCHAR(255),
     image_url VARCHAR(255),
     author VARCHAR(255),
-    description VARCHAR(255),
+    description VARCHAR(10000),
     bookshelf VARCHAR(255)
     );
 
-INSERT INTO books (id, title, isbn, image_url, author, description, bookshelf)
+INSERT INTO books (title, isbn, image_url, author, description, bookshelf)
 Values (
-1,
 'How to Do Everything Kindle Fire',
 9780071793605,
 'http://books.google.com/books/content?id=i4E0wOgHR4QC&printsec=frontcover&img=1&zoom=5&source=gbs_api',
@@ -21,9 +20,8 @@ Values (
 'Not assigned'
 );
 
-INSERT INTO books (id, title, isbn, image_url, author, description, bookshelf)
+INSERT INTO books (title, isbn, image_url, author, description, bookshelf)
 Values (
-2,
 'Boom',
 8675309,
 'http://books.google.com/books/content?id=i4E0wOgHR4QC&printsec=frontcover&img=1&zoom=5&source=gbs_api',
