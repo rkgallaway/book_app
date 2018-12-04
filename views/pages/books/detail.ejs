@@ -8,10 +8,8 @@
     <p>Database ID: <%= bookObj.id %> (remove this later)</p>
 
     <!-- show edit fields -->
-    <p>.</p>
-    <p>.</p>
-    <p>Reveals the edit form</p>
-    <input type="button" value="Update Details"/>
+    
+    <input class="selectBook" type="button" value="Update Details"/>
 
     <form action="/books/<%= bookObj.id %>" method ="post">
         <input type="hidden" name="_method" value="DELETE" />
@@ -19,7 +17,7 @@
     </form>
 
     <!-- sourced from to-do app //textarea may need attention-->
-    <form id="create-form" action="/books/<%= bookObj.id %>" method="post"> <!--toggle action?-->
+    <form class="bookDetails" id="create-form" action="/books/<%= bookObj.id %>" method="post"> <!--toggle action?-->
         <input type="hidden" name="_method" value="put" />
         <input type="hidden" name="image_url" value="<%= bookObj.image_url %>" />
         <fieldset>
@@ -35,8 +33,6 @@
             <input type="text" name="bookshelf" value="<%=bookObj.bookshelf%>" placeholder="<%=bookObj.bookshelf%>" required>
             <label for="isbn">ISBN:</label>
             <input type="text" name="isbn" value="<%= bookObj.isbn %>" placeholder="<%= bookObj.isbn %>">
-            <p>Route: app.put(/books/:id)</p>
-            <p>use method-override</p>
             <button type="submit">Save Changes</button>
         </fieldset>
     </form>

@@ -22,6 +22,7 @@
                         <button class="selectBook" >Select this book</button>
                         <!-- sourced from to-do app //textarea may need attention-->
                         <form class="bookDetails" id="create-form" action="/books" method="post"> 
+                            <input type="hidden" name="_method" value="put" />
                             <input type="hidden" name="image_url" value="<%= bookObj.image_url %>" />
                             <fieldset>
                               <legend>Edit Book Details</legend>
@@ -31,7 +32,6 @@
                               <input type="text" name="author" value="<%= bookObj.author %>" placeholder="<%= bookObj.author %>">
                               <label for="description">Description:</label>
                               <input name="description" value="<%= bookObj.description %>" placeholder="<%= bookObj.description %>" cols="30" rows="10"></input>
-                              <br>   <!--remove later with css applying to form-->
                               <label for="bookshelf">Bookshelf:</label>
                               <input type="text" name="bookshelf" value="<%= bookObj.bookshelf %>" placeholder="<%= bookObj.bookshelf %>" required>
                               <label for="isbn">ISBN:</label>
